@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
     <header class="header">
@@ -18,16 +20,11 @@
 
         <nav class="menu">
             <ul>
-                <li class="dropdown">
-                    <button class="dropdown-toggle" aria-expanded="false">GAMES ▾</button>
-                    <div class="dropdown-content games-dropdown">
-                        <a href="#" class="game-link" data-game="minecraft">Minecraft</a>
-                        <a href="#" class="game-link" data-game="wuthering-waves">Wuthering Waves</a>
-                        <a href="#" class="game-link" data-game="genshin-impact">Genshin Impact</a>
-                        <a href="#" class="game-link" data-game="arknights">Arknights</a>
-                        <a href="#" class="game-link" data-game="roblox">Roblox</a>
-                        <a href="#" class="game-link" data-game="pubg-mobile">PUBG Mobile</a>
-                        <a href="#" class="game-link" data-game="free-fire">Free Fire</a>
+                <li class="dropdown" id="account-dropdown">
+                    <button class="dropdown-toggle" aria-expanded="false">Account ▾</button>
+                    <div class="dropdown-content account-dropdown">
+                        <a href="#" id="signin-link">Sign In</a>
+                        <a href="#" id="login-link">Log In</a>
                     </div>
                 </li>
                 <li class="dropdown">
@@ -53,12 +50,49 @@
                 </li>
             </ul>
         </nav>
-
-        <div class="search-account">
-            <a href="#">Search ▾</a>
-            <a href="#">Account ▾</a>
-        </div>
     </header>
+
+    <!-- Sign-in Form -->
+    <div id="signin-form" class="auth-form">
+        <button class="close-button">×</button>
+        <h2>Sign In</h2>
+        <label for="signin-identifier">Username or Email:</label>
+        <input type="text" id="signin-identifier" name="signin-identifier">
+
+        <label for="signin-password">Password:</label>
+        <input type="password" id="signin-password" name="signin-password">
+
+        <button type="submit">Sign In</button>
+    </div>
+
+    <!-- Log-in Form -->
+    <div id="login-form" class="auth-form">
+        <button class="close-button">×</button>
+        <h2>Log In</h2>
+
+        <label for="login-realname">Real Name:</label>
+        <input type="text" id="login-realname" name="login-realname" required>
+
+        <label for="login-dob">Date of Birth:</label>
+        <input type="date" id="login-dob" name="login-dob" required>
+
+        <label for="login-email">Gmail:</label>
+        <input type="email" id="login-email" name="login-email" required>
+
+        <label for="login-username">Username:</label>
+        <input type="text" id="login-username" name="login-username" required>
+
+        <label for="login-password">Password:</label>
+        <input type="password" id="login-password" name="login-password" required>
+
+        <label for="login-confirm-password">Confirm Password:</label>
+        <input type="password" id="login-confirm-password" name="login-confirm-password" required>
+
+        <button type="submit">Log In</button>
+    </div>
+
+    <!-- Overlay -->
+    <div id="overlay" class="overlay"></div>
 
     <main id="main-content">
         <section id="game-details" style="display: none;">
@@ -70,13 +104,15 @@
         </section>
 
         <nav id="game-thumbnails">
-            <img src="image/minecraft-background-cfljc4haleghnajo.jpg" alt="Minecraft" data-game="minecraft">
+            <div class="game-thumbnails-header">Game hot trên steam</div>
+            <img src="image/Monster Hunter Wilds.jpg" alt="Monster Hunter Wilds" data-game="Monster-Hunter-Wilds">
             <img src="image/WutheringWaves_Game_Rover_Wallpaper-1.jpg" alt="Wuthering Waves" data-game="wuthering-waves">
-            <img src="image/24d8dc550994d07a213acffa544f1296_8750053204747244787.webp" alt="Genshin Impact" data-game="genshin-impact">
-            <img src="image/ark.jpg" alt="Arknights" data-game="arknights">
+            <img src="image/thumb-1920-1099191.jpg" alt="Genshin Impact" data-game="genshin-impact">
+            <img src="image/1034459.jpg" alt="Arknights" data-game="arknights">
         </nav>
     </main>
 
     <script src="script.js"></script>
 </body>
+
 </html>

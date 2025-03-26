@@ -8,8 +8,6 @@ body {
     background-attachment: fixed;
     background-size: cover;
     background-position: center;
-    object-fit: cover;
-    object-position: center;
 }
 
 /* Link Styles */
@@ -39,6 +37,7 @@ a {
     padding: 0;
     margin: 0;
     display: flex;
+    justify-content: center; /* Căn giữa thanh menu */
 }
 
 .menu li {
@@ -60,19 +59,31 @@ a {
 
 .menu button:hover,
 .menu a:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+    /*background-color: rgba(255, 255, 255, 0.1);*/ /* Standard Highlight */
     transform: scale(1.05);
 }
 
-/* Search and Account Styles */
-.search-account {
-    display: flex;
-    align-items: center;
+/* Specific Background Images */
+
+/* Using data attributes for better organization */
+.menu li[data-menu-item="account"] .menu button:hover,
+.menu li[data-menu-item="account"] .menu a:hover {
+    background-image: url("image/background-account.jpg"); /* Replace with your image path */
 }
 
-.search-account a {
-    color: white;
-    margin-left: 20px;
+.menu li[data-menu-item="news"] .menu button:hover,
+.menu li[data-menu-item="news"] .menu a:hover {
+    background-image: url("image/background-news.jpg"); /* Replace with your image path */
+}
+
+.menu li[data-menu-item="communities"] .menu button:hover,
+.menu li[data-menu-item="communities"] .menu a:hover {
+    background-image: url("image/background-communities.jpg"); /* Replace with your image path */
+}
+
+.menu li[data-menu-item="support"] .menu button:hover,
+.menu li[data-menu-item="support"] .menu a:hover {
+    background-image: url("image/background-support.jpg"); /* Replace with your image path */
 }
 
 /* Dropdown Styles */
@@ -127,7 +138,10 @@ a {
 
 /* Specific Dropdown Backgrounds */
 /* Default Background */
-.games-dropdown, .news-dropdown, .communities-dropdown, .support-dropdown {
+.account-dropdown,
+.news-dropdown,
+.communities-dropdown,
+.support-dropdown {
     background-image: url("image/bg.jpg");
     background-size: cover;
     background-position: center;
@@ -135,40 +149,11 @@ a {
     transition: background-image 0.3s ease;
 }
 
-/* Games Dropdown */
-.games-dropdown a[data-game="minecraft"]::before {
-    background-image: url("image/minecraft-background-cfljc4haleghnajo.jpg");
-}
-
-.games-dropdown a[data-game="wuthering-waves"]::before {
-    background-image: url("image/WutheringWaves_Game_Rover_Wallpaper-1.jpg");
-}
-
-.games-dropdown a[data-game="genshin-impact"]::before {
-    background-image: url("image/24d8dc550994d07a213acffa544f1296_8750053204747244787.webp");
-}
-
-.games-dropdown a[data-game="arknights"]::before {
-    background-image: url("image/ark.jpg");
-}
-
-.games-dropdown a[data-game="roblox"]::before {
-    background-image: url("image/roblox-o4i00kawfzewr0z9.jpg");
-}
-
-.games-dropdown a[data-game="pubg-mobile"]::before {
-    background-image: url("image/pubg-mobile-game-image-4.jpg");
-}
-
-.games-dropdown a[data-game="free-fire"]::before {
-    background-image: url("image/82fe305f7dbb9f25e68996f8f719e576.jpg");
-}
 
 /* News Dropdown */
 .news-dropdown a[data-news="GAMES-NEWS"]::before {
     background-image: url("image/3610756-biggest-game-news-2019-year-in-review-nologo-2.jpg");
 }
-
 .news-dropdown a[data-news="ESPORT"]::before {
     background-image: url("image/t1-lap-ky-luc-voi-chuc-vo-dich-lmht-the-gioi-thu-4-241103014627.webp");
 }
@@ -178,17 +163,9 @@ a {
     background-image: url("image/forums-bg.jpg");
 }
 
-.communities-dropdown a[data-community="groups"]::before {
-    background-image: url("image/groups-bg.jpg");
-}
-
 /* Support Dropdown */
 .support-dropdown a[data-support="faq"]::before {
     background-image: url("image/faq-bg.jpg");
-}
-
-.support-dropdown a[data-support="contact-us"]::before {
-    background-image: url("image/contact-us-bg.jpg");
 }
 
 /* Main Content Styles */
@@ -272,6 +249,15 @@ a {
     max-height: 80vh;
 }
 
+/*Game Thumbnail Header */
+#game-thumbnails .game-thumbnails-header {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #fff;
+    font-size: 1.1em;
+}
+
 #game-thumbnails img {
     width: 150px;
     height: 112.5px;
@@ -286,4 +272,76 @@ a {
 #game-thumbnails img:hover {
     transform: scale(1.1);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+}
+
+/* Style for the login/signup forms */
+.auth-form {
+    width: 300px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 1000;
+    color: white;
+}
+
+.auth-form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #00bcd4;
+}
+
+.auth-form label {
+    font-weight: bold;
+    color: #ddd;
+}
+
+.auth-form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #555;
+    border-radius: 4px;
+    background-color: #333;
+    color: white;
+    box-sizing: border-box;
+}
+
+.auth-form button[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    background-color: #00bcd4;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.auth-form button[type="submit"]:hover {
+    background-color: #00a3b3;
+}
+
+.auth-form .close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.auth-form.active {
+    display: block;
 }
