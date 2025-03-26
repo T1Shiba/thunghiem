@@ -10,13 +10,11 @@ document.addEventListener('DOMContentLoaded', () => {
         let isValid = true;
         const errors = {};
 
-        // Helper function to add an error message
         const addError = (fieldId, message) => {
             errors[fieldId] = message;
             isValid = false;
         };
 
-        // Get all input values and trim
         const realname = document.getElementById('login-realname')?.value?.trim() || '';
         const dob = document.getElementById('login-dob')?.value || '';
         const email = document.getElementById('login-email')?.value?.trim() || '';
@@ -26,7 +24,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const signinIdentifier = document.getElementById('signin-identifier')?.value?.trim() || '';
         const signinPassword = document.getElementById('signin-password')?.value || '';
 
-        // --- Validation Logic ---
         if (formId === 'login-form') {
             if (!realname) addError('login-realname', "Real Name cannot be empty!");
             if (!dob) addError('login-dob', "Date of Birth cannot be empty!");
@@ -41,7 +38,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!signinPassword) addError('signin-password', "Password cannot be empty!");
         }
 
-        // Display Errors
         if (!isValid) {
             const errorMessages = Object.values(errors).join('\n');
             alert(errorMessages);
@@ -55,16 +51,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const form = document.getElementById(formId);
 
         form.addEventListener('submit', (event) => {
-            event.preventDefault(); // Prevent default submission
-
+            event.preventDefault();
             if (validateForm(formId)) {
-                alert(successMessage); // Display the success message
-                // In a real application, you would submit data to the server here.
+                alert(successMessage);
             }
         });
     };
 
-    // --- Event Listeners for Form Submissions ---
     handleFormSubmit('login-form', "Registration successful! (Note: No real server-side processing or email verification is implemented.)");
     handleFormSubmit('signin-form', "Sign-in successful! (Note: No real server-side processing.)");
 
@@ -82,8 +75,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const showForm = (form) => {
         form.classList.add('active');
         overlay.classList.add('active');
-        accountDropdownContent.style.display = 'none'; // Hide dropdown content directly
-        accountDropdown.classList.remove('active'); // Deactivate the dropdown
+        accountDropdownContent.style.display = 'none';
+        accountDropdown.classList.remove('active');
     };
 
     const hideForm = (form) => {
@@ -127,65 +120,40 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // --- Regular dropdown close ---
-    document.querySelectorAll('.dropdown-toggle').forEach(toggle => {
-        toggle.addEventListener('click', () => {
-            const listItem = toggle.parentElement;
-            document.querySelectorAll('.menu li').forEach(item => {
-                if (item !== listItem) {
-                    item.classList.remove('active');
-                    item.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false');
-                }
-            });
-            listItem.classList.toggle('active');
-            toggle.setAttribute('aria-expanded', listItem.classList.contains('active').toString());
-        });
-    });
-
-    document.addEventListener('click', (event) => {
-        if (!event.target.closest('.menu')) {
-            document.querySelectorAll('.menu li.active').forEach(item => {
-                item.classList.remove('active');
-                item.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false');
-            });
-        }
-    });
-
     // --- Game Details Section ---
     const gameDetailsSection = document.getElementById('game-details');
     const gameVideoDiv = document.getElementById('game-video');
-    const gameLinkDiv = document.getElementById('game-link');
     const gameDescriptionDiv = document.getElementById('game-description');
 
     const gameData = {
-        'Monster-Hunter-Wilds': {
+        'monster-hunter-wilds': {
             video: 'https://www.youtube.com/watch?v=BRCJiOEGYY4',
-            developerLink: '<a href="https://www.monsterhunter.com/wilds/en-asia/" target="_blank">Monster Hunter Wilds</a>',
-            steamLink: '<a href="https://store.steampowered.com/app/2246340/Monster_Hunter_Wilds/" target="_blank">Steam Page</a>',
-            description: 'Mô tả',
-            backgroundImage: 'url("image/Monster Hunter Wilds.jpg")'
+            publisherLink: 'https://www.monsterhunter.com/wilds/en-asia/',
+            steamLink: 'https://store.steampowered.com/app/2246340/Monster_Hunter_Wilds/',
+            description: 'Monster Hunter Wilds là tựa game hành động nhập vai đỉnh cao từ Capcom, nơi bạn săn những con quái vật khổng lồ trong một thế giới mở đầy sống động.',
+            backgroundImage: 'url("image/monster-hunter-wilds-1702048878670561605042.webp")'
         },
-        'wuthering-waves': {
-            video: 'https://www.youtube.com/watch?v=jT_dCQhT-ZI&pp=ygUXd3V0aGVyaW5nIHdhdmVzIHRyYWlsZXI%3D',
-            developerLink: '<a href="https://wutheringwaves.kurogame.com/" target="_blank">Wuthering Waves</a>',
-            steamLink: '<a href="https://store.steampowered.com/app/221100/DayZ/" target="_blank">Steam Page</a>',
-            description: 'Mô tả',
-            backgroundImage: 'url("image/WutheringWaves_Game_Rover_Wallpaper-1.jpg")'
+        'repo': {
+            video: 'https://www.youtube.com/watch?v=oSfoK8eSeD8',
+            publisherLink: 'https://semiwork.se/',
+            steamLink: 'https://store.steampowered.com/app/3241660/REPO/', // Link giả, bro thay link thật
+            description: 'R.E.P.O là một game indie độc đáo, mang đến trải nghiệm chiến đấu và khám phá trong một thế giới khoa học viễn tưởng.',
+            backgroundImage: 'url("image/REPO.jpg")'
         },
-        'genshin-impact': {
-            video: 'https://www.youtube.com/watch?v=VW7lkG8b74Q',
-            developerLink: '<a href="https://genshin.hoyoverse.com/" target="_blank">Genshin Impact</a>',
-            steamLink: '<a href="https://store.steampowered.com/app/221100/DayZ/" target="_blank">Steam Page</a>',
-            description: 'Mô tả',
-            backgroundImage: 'url("image/thumb-1920-1099191.jpg")'
+        'assassins-creed-shadows': {
+            video: 'https://www.youtube.com/watch?v=_JzywR97gUs',
+            publisherLink: 'https://www.ubisoft.com/en-us/game/assassins-creed/shadows',
+            steamLink: 'https://store.steampowered.com/app/3159330/Assassins_Creed_Shadows/', // Link giả, bro thay link thật
+            description: 'Assassin’s Creed Shadows đưa bạn đến Nhật Bản thời phong kiến, nơi bạn hóa thân thành sát thủ và ninja trong một thế giới mở tuyệt đẹp.',
+            backgroundImage: 'url("image/ACS.jpg")'
         },
-        'arknights': {
-            video: 'https://www.youtube.com/watch?v=--xJQ5oNcCA',
-            developerLink: '<a href="https://arknights.global/" target="_blank">Arknights</a>',
-            steamLink: '<a href="https://store.steampowered.com/app/221100/DayZ/" target="_blank">Steam Page</a>',
-            description: 'Mô tả',
-            backgroundImage: 'url("image/1034459.jpg")'
-        },
+        'counter-strike-2': {
+            video: 'https://www.youtube.com/watch?v=c80dVYcL69E',
+            publisherLink: 'https://www.valvesoftware.com/en/',
+            steamLink: 'https://store.steampowered.com/app/730/CounterStrike_2/',
+            description: 'Counter-Strike 2 là phiên bản nâng cấp của tựa game bắn súng huyền thoại, mang đến đồ họa hiện đại và lối chơi chiến thuật đỉnh cao.',
+            backgroundImage: 'url("image/cs2.jpg")'
+        }
     };
 
     const youtubeParser = (url) => {
@@ -200,16 +168,17 @@ document.addEventListener('DOMContentLoaded', () => {
         if (data) {
             const videoId = youtubeParser(data.video);
             let embedUrl = '<p>Không tìm thấy video.</p>';
-
             if (videoId) {
                 embedUrl = `<iframe src="https://www.youtube.com/embed/${videoId}" frameborder="0" allowfullscreen></iframe>`;
             }
 
             gameVideoDiv.innerHTML = embedUrl;
-            gameLinkDiv.innerHTML = `
-                ${data.developerLink ? `<div class="developer-link">${data.developerLink}</div>` : ''}
-                ${data.steamLink ? `<div class="steam-link">${data.steamLink}</div>` : ''}
-            `;
+            const publisherLinkElement = document.getElementById('publisher-link');
+            publisherLinkElement.href = data.publisherLink || '#';
+
+            const steamLinkElement = document.getElementById('steam-link');
+            steamLinkElement.href = data.steamLink || '#';
+
             gameDescriptionDiv.textContent = data.description;
             gameDetailsSection.style.display = 'flex';
             document.body.style.backgroundImage = data.backgroundImage;
@@ -219,19 +188,43 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             console.error('Không tìm thấy dữ liệu cho game:', game);
             gameVideoDiv.innerHTML = '<p>Không tìm thấy video.</p>';
-            gameLinkDiv.innerHTML = '';
+            document.getElementById('publisher-link').href = '#';
+            document.getElementById('steam-link').href = '#';
             gameDescriptionDiv.textContent = 'Không tìm thấy mô tả.';
             gameDetailsSection.style.display = 'block';
             document.body.style.backgroundImage = '';
         }
     };
 
-    showGameDetails('minecraft');
+    const firstGameKey = Object.keys(gameData)[0];
+    showGameDetails(firstGameKey);
 
     document.querySelectorAll('#game-thumbnails img').forEach(img => {
         img.addEventListener('click', () => {
             const game = img.dataset.game;
             showGameDetails(game);
         });
+    });
+
+    // --- Dropdown Logic for News, Communities, and Support ---
+    document.querySelectorAll('.dropdown-toggle').forEach(toggle => {
+        toggle.addEventListener('click', (event) => {
+            const parent = toggle.parentElement;
+            const dropdownContent = parent.querySelector('.dropdown-content');
+            document.querySelectorAll('.dropdown-content').forEach(content => {
+                if (content !== dropdownContent) {
+                    content.style.display = 'none';
+                }
+            });
+            dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
+        });
+    });
+
+    document.addEventListener('click', (event) => {
+        if (!event.target.closest('.dropdown')) {
+            document.querySelectorAll('.dropdown-content').forEach(content => {
+                content.style.display = 'none';
+            });
+        }
     });
 });
